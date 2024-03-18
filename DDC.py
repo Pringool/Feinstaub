@@ -5,7 +5,7 @@ class DatabaseDownloderConnector:
         pass
 
 
-    def download_files(self):
+    def download_files(self,):
         pass
 
     def delete_files(self):
