@@ -2,11 +2,11 @@
 
 class DatabaseDownloderConnector:
     def __init__(self) -> None:
-        pass
+        self.db = Database()
 
 
-    def download_files(self,):
-        pass
+    def download_files(self, year:int, monty:int, day:int, amount:int, increment:bool):
+        Donwloader(year, monty, day, increment, amount)
 
     def delete_files(self):
         pass
