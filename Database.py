@@ -1,5 +1,6 @@
 import os
 import sqlite3
+import datetime
 
 CREATE_SDS = """
 CREATE TABLE IF NOT EXISTS sds011(
@@ -37,4 +38,35 @@ class Database:
     def insert_dht(self, sqltuple:list[tuple[str, float, float]]):
         self.__cur.executemany("INSERT INTO dht22(date, temperature, humidity) VALUES(?,?,?)",sqltuple)
         self.__con.commit()
+    
+    def minimum_of_temperature(self, start_date:datetime.date, end_date:datetime.date):
+        self.__cur.execute("SELECT ROUND(MIN(temperature),2) FROM dht22 WHERE date BETWEEN ? AND ?", (start_date, end_date))
+        results = self.__cur.fetchone()
+        return results[0]
+        
+    def average_of_temperature(self, start_date:datetime.date, end_date:datetime.date):
+        self.__cur.execute("SELECT ROUND(AVG(temperature),2) FROM dht22 WHERE date BETWEEN ? AND ?", (start_date, end_date))
+        results = self.__cur.fetchone()
+        return results[0]
+        
+    def maximum_of_temperature(self, start_date:datetime.date, end_date:datetime.date):
+        self.__cur.execute("SELECT ROUND(MAX(temperature),2) FROM dht22 WHERE date BETWEEN ? AND ?", (start_date, end_date))
+        results = self.__cur.fetchone()
+        return results[0]   
  
+    def minimum_of_humidity(self, start_date:datetime.date, end_date:datetime.date):
+        self.__cur.execute("SELECT ROUND(MIN(humidity),2) FROM dht22 WHERE date BETWEEN ? AND ?", (start_date, end_date))
+        results = self.__cur.fetchone()
+        return results[0]
+        
+    def average_of_humidity(self, start_date:datetime.date, end_date:datetime.date):
+        self.__cur.execute("SELECT ROUND(AVG(humidity),2) FROM dht22 WHERE date BETWEEN ? AND ?", (start_date, end_date))
+        results = self.__cur.fetchone()
+        return results[0]
+        
+    def maximum_of_humidity(self, start_date:datetime.date, end_date:datetime.date):
+        self.__cur.execute("SELECT ROUND(MAX(humidity),2) FROM dht22 WHERE date BETWEEN ? AND ?", (start_date, end_date))
+        results = self.__cur.fetchone()
+        return results[0] 
+      
+
