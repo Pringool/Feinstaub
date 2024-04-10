@@ -98,4 +98,174 @@ class Database:
         self.__cur.execute("SELECT ROUND(MAX(p2),2) FROM sds011 WHERE date BETWEEN ? AND ?", (start_date, end_date))
         results = self.__cur.fetchone()
         return results[0] 
+    
+########## Per day #############
+
+    def minimum_of_temperature_per_day(self, start_date:datetime.date, end_date:datetime.date):
+        current_date = start_date
+        current_end_date = current_date + datetime.timedelta(days=1)
+        results = []
+        dates = []
+        for _ in range(abs((end_date - start_date).days)):
+            self.__cur.execute("SELECT ROUND(MIN(temperature),2) FROM dht22 WHERE date BETWEEN ? AND ?", (current_date, current_end_date))
+            result = self.__cur.fetchone()
+            results.append(result[0])
+            dates.append(current_date)
+            current_date += datetime.timedelta(days=1)
+            current_end_date += datetime.timedelta(days=1)
+        return results, dates
+        
+    def average_of_temperature_per_day(self, start_date:datetime.date, end_date:datetime.date):
+        current_date = start_date
+        current_end_date = current_date + datetime.timedelta(days=1)
+        results = []
+        dates = []
+        for _ in range(abs((end_date - start_date).days)):
+            self.__cur.execute("SELECT ROUND(AVG(temperature),2) FROM dht22 WHERE date BETWEEN ? AND ?", (current_date, current_end_date))
+            result = self.__cur.fetchone()
+            results.append(result[0])
+            dates.append(current_date)
+            current_date += datetime.timedelta(days=1)
+            current_end_date += datetime.timedelta(days=1)
+        return results, dates
+        
+    def maximum_of_temperature_per_day(self, start_date:datetime.date, end_date:datetime.date):#
+        current_date = start_date
+        current_end_date = current_date + datetime.timedelta(days=1)
+        results = []
+        dates = []
+        for _ in range(abs((end_date - start_date).days)):
+            self.__cur.execute("SELECT ROUND(MAX(temperature),2) FROM dht22 WHERE date BETWEEN ? AND ?", (current_date, current_end_date))
+            result = self.__cur.fetchone()
+            results.append(result[0])
+            dates.append(current_date)
+            current_date += datetime.timedelta(days=1)
+            current_end_date += datetime.timedelta(days=1)
+        return results, dates
+    
+    def minimum_of_humidity_per_day(self, start_date:datetime.date, end_date:datetime.date):
+        current_date = start_date
+        current_end_date = current_date + datetime.timedelta(days=1)
+        results = []
+        dates = []
+        for _ in range(abs((end_date - start_date).days)):
+            self.__cur.execute("SELECT ROUND(MIN(humidity),2) FROM dht22 WHERE date BETWEEN ? AND ?", (current_date, current_end_date))
+            result = self.__cur.fetchone()
+            results.append(result[0])
+            dates.append(current_date)
+            current_date += datetime.timedelta(days=1)
+            current_end_date += datetime.timedelta(days=1)
+        return results, dates
+        
+    def average_of_humidity_per_day(self, start_date:datetime.date, end_date:datetime.date):
+        current_date = start_date
+        current_end_date = current_date + datetime.timedelta(days=1)
+        results = []
+        dates = []
+        for _ in range(abs((end_date - start_date).days)):
+            self.__cur.execute("SELECT ROUND(AVG(humidity),2) FROM dht22 WHERE date BETWEEN ? AND ?", (current_date, current_end_date))
+            result = self.__cur.fetchone()
+            results.append(result[0])
+            dates.append(current_date)
+            current_date += datetime.timedelta(days=1)
+            current_end_date += datetime.timedelta(days=1)
+        return results, dates
+        
+    def maximum_of_humidity_per_day(self, start_date:datetime.date, end_date:datetime.date):#
+        current_date = start_date
+        current_end_date = current_date + datetime.timedelta(days=1)
+        results = []
+        dates = []
+        for _ in range(abs((end_date - start_date).days)):
+            self.__cur.execute("SELECT ROUND(MAX(humidity),2) FROM dht22 WHERE date BETWEEN ? AND ?", (current_date, current_end_date))
+            result = self.__cur.fetchone()
+            results.append(result[0])
+            dates.append(current_date)
+            current_date += datetime.timedelta(days=1)
+            current_end_date += datetime.timedelta(days=1)
+        return results, dates
+    
+    def minimum_of_particle1_per_day(self, start_date:datetime.date, end_date:datetime.date):
+        current_date = start_date
+        current_end_date = current_date + datetime.timedelta(days=1)
+        results = []
+        dates = []
+        for _ in range(abs((end_date - start_date).days)):
+            self.__cur.execute("SELECT ROUND(MIN(p1),2) FROM sds011 WHERE date BETWEEN ? AND ?", (current_date, current_end_date))
+            result = self.__cur.fetchone()
+            results.append(result[0])
+            dates.append(current_date)
+            current_date += datetime.timedelta(days=1)
+            current_end_date += datetime.timedelta(days=1)
+        return results, dates
+        
+    def average_of_particle1_per_day(self, start_date:datetime.date, end_date:datetime.date):
+        current_date = start_date
+        current_end_date = current_date + datetime.timedelta(days=1)
+        results = []
+        dates = []
+        for _ in range(abs((end_date - start_date).days)):
+            self.__cur.execute("SELECT ROUND(AVG(p1),2) FROM sds011 WHERE date BETWEEN ? AND ?", (current_date, current_end_date))
+            result = self.__cur.fetchone()
+            results.append(result[0])
+            dates.append(current_date)
+            current_date += datetime.timedelta(days=1)
+            current_end_date += datetime.timedelta(days=1)
+        return results, dates
+        
+    def maximum_of_particle1_per_day(self, start_date:datetime.date, end_date:datetime.date):
+        current_date = start_date
+        current_end_date = current_date + datetime.timedelta(days=1)
+        results = []
+        dates = []
+        for _ in range(abs((end_date - start_date).days)):
+            self.__cur.execute("SELECT ROUND(MAX(p1),2) FROM sds011 WHERE date BETWEEN ? AND ?", (current_date, current_end_date))
+            result = self.__cur.fetchone()
+            results.append(result[0])
+            dates.append(current_date)
+            current_date += datetime.timedelta(days=1)
+            current_end_date += datetime.timedelta(days=1)
+        return results, dates
+  
+    def minimum_of_particle2_per_day(self, start_date:datetime.date, end_date:datetime.date):
+        current_date = start_date
+        current_end_date = current_date + datetime.timedelta(days=1)
+        results = []
+        dates = []
+        for _ in range(abs((end_date - start_date).days)):
+            self.__cur.execute("SELECT ROUND(MIN(p2),2) FROM sds011 WHERE date BETWEEN ? AND ?", (current_date, current_end_date))
+            result = self.__cur.fetchone()
+            results.append(result[0])
+            dates.append(current_date)
+            current_date += datetime.timedelta(days=1)
+            current_end_date += datetime.timedelta(days=1)
+        return results, dates
+        
+    def average_of_particle2_per_day(self, start_date:datetime.date, end_date:datetime.date):
+        current_date = start_date
+        current_end_date = current_date + datetime.timedelta(days=1)
+        results = []
+        dates = []
+        for _ in range(abs((end_date - start_date).days)):
+            self.__cur.execute("SELECT ROUND(AVG(p2),2) FROM sds011 WHERE date BETWEEN ? AND ?", (current_date, current_end_date))
+            result = self.__cur.fetchone()
+            results.append(result[0])
+            dates.append(current_date)
+            current_date += datetime.timedelta(days=1)
+            current_end_date += datetime.timedelta(days=1)
+        return results, dates
+        
+    def maximum_of_particle2_per_day(self, start_date:datetime.date, end_date:datetime.date):
+        current_date = start_date
+        current_end_date = current_date + datetime.timedelta(days=1)
+        results = []
+        dates = []
+        for _ in range(abs((end_date - start_date).days)):
+            self.__cur.execute("SELECT ROUND(MAX(p2),2) FROM sds011 WHERE date BETWEEN ? AND ?", (current_date, current_end_date))
+            result = self.__cur.fetchone()
+            results.append(result[0])
+            dates.append(current_date)
+            current_date += datetime.timedelta(days=1)
+            current_end_date += datetime.timedelta(days=1)
+        return results, dates
 
