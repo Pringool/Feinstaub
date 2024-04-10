@@ -69,4 +69,33 @@ class Database:
         results = self.__cur.fetchone()
         return results[0] 
       
+    def minimum_of_particle1(self, start_date:datetime.date, end_date:datetime.date):
+        self.__cur.execute("SELECT ROUND(MIN(p1),2) FROM sds011 WHERE date BETWEEN ? AND ?", (start_date, end_date))
+        results = self.__cur.fetchone()
+        return results[0]
+        
+    def average_of_particle1(self, start_date:datetime.date, end_date:datetime.date):
+        self.__cur.execute("SELECT ROUND(AVG(p1),2) FROM sds011 WHERE date BETWEEN ? AND ?", (start_date, end_date))
+        results = self.__cur.fetchone()
+        return results[0]
+        
+    def maximum_of_particle1(self, start_date:datetime.date, end_date:datetime.date):
+        self.__cur.execute("SELECT ROUND(MAX(p1),2) FROM sds011 WHERE date BETWEEN ? AND ?", (start_date, end_date))
+        results = self.__cur.fetchone()
+        return results[0] 
+
+    def minimum_of_particle2(self, start_date:datetime.date, end_date:datetime.date):
+        self.__cur.execute("SELECT ROUND(MIN(p2),2) FROM sds011 WHERE date BETWEEN ? AND ?", (start_date, end_date))
+        results = self.__cur.fetchone()
+        return results[0]
+        
+    def average_of_particle2(self, start_date:datetime.date, end_date:datetime.date):
+        self.__cur.execute("SELECT ROUND(AVG(p2),2) FROM sds011 WHERE date BETWEEN ? AND ?", (start_date, end_date))
+        results = self.__cur.fetchone()
+        return results[0]
+        
+    def maximum_of_particle2(self, start_date:datetime.date, end_date:datetime.date):
+        self.__cur.execute("SELECT ROUND(MAX(p2),2) FROM sds011 WHERE date BETWEEN ? AND ?", (start_date, end_date))
+        results = self.__cur.fetchone()
+        return results[0] 
 
