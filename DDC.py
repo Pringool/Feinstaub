@@ -59,7 +59,42 @@ class DatabaseDownloderConnector:
             desc="SDS Insert",
             colour="blue"
             ))     
-        
+
+    def __insert_into_database_dht(self, filename):
+        with open(filename, newline='') as csvfile:
+            reader = csv.reader(csvfile, delimiter=";")
+            line_count = 0
+            dht_rows = []
+            for row in reader:
+                if line_count == 0:
+                    # print(f'Column names are {", ".join(row)}')
+                    line_count += 1
+                else:
+                    dht_rows.append((row[5], row[6], row[7]))
+                    # print(f'\t{row[6]} --- {row[7]} --- {row[5]}')
+                    line_count += 1
+            self.db.insert_dht(dht_rows)
+                
+        return line_count
+                        
+    def __insert_into_database_sds(self, filename):
+        with open(filename, newline='') as csvfile:
+            reader = csv.reader(csvfile, delimiter=";")
+            line_count = 0
+            sds_rows = []
+            for row in reader:
+                if line_count == 0:
+                    # print(f'Column names are {", ".join(row)}', len(row))
+                    line_count += 1
+                else:
+                    sds_rows.append((row[5], row[6], row[9]))
+                    # print(f'\t{row[6]} --- {row[9]} --- {row[5]}')
+                    line_count += 1
+
+            self.db.insert_sds(sds_rows)
+
+        return line_count
+
 
     def start_evaluation(self):
         pass
