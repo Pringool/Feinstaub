@@ -2,7 +2,7 @@ from Downloader import Donwloader
 from Database import Database
 from tqdm import tqdm
 import os, glob, csv
-
+import matplotlib.pyplot as plt
 
 class DatabaseDownloderConnector:
     def __init__(self) -> None:
@@ -96,5 +96,107 @@ class DatabaseDownloderConnector:
         return line_count
 
 
-    def start_evaluation(self):
-        pass
+    def start_evaluation(self, start_date, end_date):
+        stemp_min = self.db.minimum_of_temperature(start_date, end_date)
+        stemp_avg = self.db.average_of_temperature(start_date, end_date)
+        stemp_max = self.db.maximum_of_temperature(start_date, end_date)
+        temps_min, tdates_min = self.db.minimum_of_temperature_per_day(start_date, end_date)
+        temps_avg, tdates_avg = self.db.average_of_temperature_per_day(start_date, end_date)
+        temps_max, tdates_max = self.db.maximum_of_temperature_per_day(start_date, end_date)        
+        
+        ###
+        
+        shumi_min = self.db.minimum_of_humidity(start_date, end_date)
+        shumi_avg = self.db.average_of_humidity(start_date, end_date)
+        shumi_max = self.db.maximum_of_humidity(start_date, end_date)
+        humis_min, hdates_min = self.db.minimum_of_humidity_per_day(start_date, end_date)
+        humis_avg, hdates_avg = self.db.average_of_humidity_per_day(start_date, end_date)
+        humis_max, hdates_max = self.db.maximum_of_humidity_per_day(start_date, end_date)
+        
+        ###
+        
+        sp1_min = self.db.minimum_of_particle1(start_date, end_date)
+        sp1_avg = self.db.average_of_particle1(start_date, end_date)
+        sp1_max = self.db.maximum_of_particle1(start_date, end_date)
+        p1_min, p1dates_min = self.db.minimum_of_particle1_per_day(start_date, end_date)
+        p1_avg, p1dates_avg = self.db.average_of_particle1_per_day(start_date, end_date)
+        p1_max, p1dates_max = self.db.maximum_of_particle1_per_day(start_date, end_date)
+        
+        ###
+        
+        sp2_min = self.db.minimum_of_particle2(start_date, end_date)
+        sp2_avg = self.db.average_of_particle2(start_date, end_date)
+        sp2_max = self.db.maximum_of_particle2(start_date, end_date)
+        p2_min, p2dates_min = self.db.minimum_of_particle2_per_day(start_date, end_date)
+        p2_avg, p2dates_avg = self.db.average_of_particle2_per_day(start_date, end_date)
+        p2_max, p2dates_max = self.db.maximum_of_particle2_per_day(start_date, end_date)
+        
+#########################################################################################################
+
+        figure, axis = plt.subplots(4, 2) 
+        
+        axis[0,0].bar([10], [stemp_min], color="r", label="Min")
+        axis[0,0].bar([20], [stemp_max], color="g", label="Max")
+        axis[0,0].bar([30], [stemp_avg], color="b", label="Avg")
+        axis[0,0].set_title("Combined Temperature over time")
+        axis[0,0].legend()
+        
+        axis[1,0].plot(tdates_min, temps_min, color="r", label="Min")
+        axis[1,0].plot(tdates_max, temps_max, color="g", label="Max")
+        axis[1,0].plot(tdates_avg, temps_avg, color="b", label="Avg")
+        axis[1,0].set_title("Temperature over time")      
+        axis[1,0].legend()
+        
+        ###
+        
+        axis[0,1].bar([10], [shumi_min], color="r", label="Min")
+        axis[0,1].bar([20], [shumi_max], color="g", label="Max")
+        axis[0,1].bar([30], [shumi_avg], color="b", label="Avg")
+        axis[0,1].set_title("Combined Humidity over time")
+        axis[0,1].legend()
+        
+        axis[1,1].plot(hdates_min, humis_min, color="r", label="Min")
+        axis[1,1].plot(hdates_max, humis_max, color="g", label="Max")
+        axis[1,1].plot(hdates_avg, humis_avg, color="b", label="Avg")
+        axis[1,1].set_title("Humidity over time")
+        axis[1,1].legend()
+        
+        ###
+        
+        axis[2,0].bar([10], [sp1_min], color="r", label="Min")
+        axis[2,0].bar([20], [sp1_max], color="g", label="Max")
+        axis[2,0].bar([30], [sp1_avg], color="b", label="Avg")
+        axis[2,0].set_title("Combined Particle 1 over time")
+        axis[2,0].legend()
+        
+        axis[3,0].plot(p1dates_min, p1_min, color="r", label="Min")
+        axis[3,0].plot(p1dates_max, p1_max, color="g", label="Max")
+        axis[3,0].plot(p1dates_avg, p1_avg, color="b", label="Avg")
+        axis[3,0].set_title("Particle 1 over time")
+        axis[3,0].legend()
+        
+        ###
+        
+        axis[2,1].bar([10], [sp2_min], color="r", label="Min")
+        axis[2,1].bar([20], [sp2_max], color="g", label="Max")
+        axis[2,1].bar([30], [sp2_avg], color="b", label="Avg")
+        axis[2,1].set_title("Combined Particle 2 over time")
+        axis[2,1].legend()
+        
+        axis[3,1].plot(p2dates_min, p2_min, color="r", label="Min")
+        axis[3,1].plot(p2dates_max, p2_max, color="g", label="Max")
+        axis[3,1].plot(p2dates_avg, p2_avg, color="b", label="Avg")
+        axis[3,1].set_title("Particle 2 over time")
+        axis[3,1].legend()
+        
+        # axis[1].xlabel("Date") 
+        # axis[1].ylabel("Temperature") 
+        
+        plt.autoscale()
+        
+        manager = plt.get_current_fig_manager()
+        manager.full_screen_toggle()
+        
+        plt.tight_layout()
+        plt.show()
+        
