@@ -1,5 +1,5 @@
 from PyQt6 import QtCore, QtGui, QtWidgets
-from DDC import DatabaseDownloderConnector
+from DDC import DatabaseDownloaderConnector
 
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
@@ -301,7 +301,7 @@ class Ui_MainWindow(object):
         self.from_date.dateChanged.connect(self.from_time_changed)
         self.from_date_analyze.dateChanged.connect(self.from_time_changed_analyze)
         self.increment_checkbox.stateChanged.connect(self.increment_changed)
-        self.ddc = DatabaseDownloderConnector()
+        self.ddc = DatabaseDownloaderConnector()
         self.download_button.clicked.connect(self.download_files)
         self.delete_button.clicked.connect(self.delete_files)
         self.insert_button.clicked.connect(self.load_files_into_database)

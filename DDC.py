@@ -4,7 +4,7 @@ from tqdm import tqdm
 import os, glob, csv
 import matplotlib.pyplot as plt
 
-class DatabaseDownloderConnector:
+class DatabaseDownloaderConnector:
     def __init__(self) -> None:
         self.db = Database()
         self.dht_filenames: list[str] = []
