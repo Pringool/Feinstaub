@@ -1,4 +1,4 @@
-from Downloader import Donwloader
+from Downloder import Downloader
 from Database import Database
 from tqdm import tqdm
 import os, glob, csv
@@ -11,7 +11,7 @@ class DatabaseDownloderConnector:
         self.sds_filenames: list[str] = []
 
     def download_files(self, year:int, monty:int, day:int, amount:int, increment:bool):
-        Donwloader(year, monty, day, increment, amount)
+        Downloader(year, monty, day, increment, amount)
         for filename in glob.glob(os.path.join(os.getcwd(),"files","dht","*.csv")):
             self.dht_filenames.append(filename)        
             

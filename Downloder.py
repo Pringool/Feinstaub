@@ -98,15 +98,15 @@ class Downloader:
                 # print(response_dht_gz.text)
             self.__unzip_gz(False, date)
 
-    def __unzip_gz(self, is_dhp: bool, date):
-        if is_dhp:
+    def __unzip_gz(self, is_dht: bool, date):
+        if is_dht:
             with gzip.open(os.path.join(os.path.dirname(__file__),"tmp","dht",date+"_dht22_sensor_3660.csv.gz"), "rb") as g:
-                with open(os.path.join(os.path.dirname(__file__),"files","dht",date+"_dht22_sensor_3660.csv"), "w+") as f:
+                with open(os.path.join(os.path.dirname(__file__),"files","dht",date+"_dht22_sensor_3660.csv"), "w") as f:
                     for line in g:
                         f.write(line.decode("utf-8"))
         else:
             with gzip.open(os.path.join(os.path.dirname(__file__),"tmp","sds",date+"_sds011_sensor_3659.csv.gz"), "rb") as g:
-                with open(os.path.join(os.path.dirname(__file__),"files","sds",date+"_sds011_sensor_3659.csv"), "w+") as f:
+                with open(os.path.join(os.path.dirname(__file__),"files","sds",date+"_sds011_sensor_3659.csv"), "w") as f:
                     for line in g:
                         f.write(line.decode("utf-8"))
                         
