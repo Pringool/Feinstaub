@@ -38,7 +38,15 @@ class Database:
     def insert_dht(self, sqltuple:list[tuple[str, float, float]]):
         self.__cur.executemany("INSERT INTO dht22(date, temperature, humidity) VALUES(?,?,?)",sqltuple)
         self.__con.commit()
-    
+
+    def get_all_data_from_sds(self) -> list:
+        self.__cur.execute("SELECT date, p1, p2, entry_id FROM sds011;")
+        return self.__cur.fetchall()
+
+    def get_all_data_from_dht(self) -> list:
+        self.__cur.execute("SELECT date, temperature, humidity, entry_id FROM dht22;")
+        return self.__cur.fetchall()
+
     def minimum_of_temperature(self, start_date:datetime.date, end_date:datetime.date):
         self.__cur.execute("SELECT ROUND(MIN(temperature),2) FROM dht22 WHERE date BETWEEN ? AND ?", (start_date, end_date))
         results = self.__cur.fetchone()
