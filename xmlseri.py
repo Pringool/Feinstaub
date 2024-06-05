@@ -5,8 +5,6 @@ from xml.dom.minidom import parseString
 
 db = Database()
 
-sds_xml_list = []
-dht_xml_list = []
 class Database_Export:
     def __init__(self) -> None:
         self.sds: dict = {}
